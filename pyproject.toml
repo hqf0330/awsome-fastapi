@@ -1,11 +1,11 @@
 [project]
-name = "fastapi_best_architecture"
+name = "awsome-fastapi"
 description = """
 A RBAC (Role-Based Access Control) permission control system built on FastAPI, featuring a unique pseudo-three-tier
 architecture design, with built-in basic implementation of fastapi admin as a template library, free and open-source.
 """
 authors = [
-    { name = "Wu Clan", email = "jianhengwu0407@gmail.com" },
+    { name = "binghu", email = "binghu@realshark.com" },
 ]
 readme = "README.md"
 license = { text = "MIT" }
