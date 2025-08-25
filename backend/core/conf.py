@@ -33,6 +33,17 @@ class Settings(BaseSettings):
     DATETIME_TIMEZONE: str = 'Asia/Shanghai'
     DATETIME_FORMAT: str = '%Y-%m-%d %H:%M:%S'
 
+    # I18n 配置
+    I18N_DEFAULT_LANGUAGE: str = 'zh-CN'
+
+    # 演示模式配置
+    DEMO_MODE: bool = False
+    DEMO_MODE_EXCLUDE: set[tuple[str, str]] = {
+        ('POST', f'{FASTAPI_API_V1_PATH}/auth/login'),
+        ('POST', f'{FASTAPI_API_V1_PATH}/auth/logout'),
+        ('GET', f'{FASTAPI_API_V1_PATH}/auth/captcha'),
+    }
+
 
 @lru_cache
 def get_settings() -> Settings:
