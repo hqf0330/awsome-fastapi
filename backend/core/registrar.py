@@ -1,9 +1,13 @@
+from wsgiref.validate import validator
+
 from fastapi import Depends, FastAPI
 from backend.utils.serializers import MsgSpecJSONResponse
 from backend.core.conf import settings
 from backend.plugin.tools import build_final_router
 from backend.utils.demo_site import demo_site
 from backend.utils.health_check import ensure_unique_route_names
+
+from asgi_correlation_id import CorrelationIdMiddleware
 
 
 def register_app() -> FastAPI:
@@ -18,6 +22,8 @@ def register_app() -> FastAPI:
         # lifespan=
     )
 
+    # 注册中间件
+    register_middleware(app)
     # 注册路由
     register_router(app)
 
@@ -40,3 +46,13 @@ def register_router(app: FastAPI) -> None:
     ensure_unique_route_names(app)
 
 
+def register_middleware(app: FastAPI) -> None:
+    """
+    注册中间件（执行顺序从下到上）
+
+    :param app: FastAPI 应用实例
+    :return:
+    """
+
+    # Trace ID
+    app.add_middleware(CorrelationIdMiddleware, validator=False)
