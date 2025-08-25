@@ -1,6 +1,8 @@
 from wsgiref.validate import validator
 
 from fastapi import Depends, FastAPI
+
+from backend.middleware.opera_log_middleware import OperaLogMiddleware
 from backend.utils.serializers import MsgSpecJSONResponse
 from backend.core.conf import settings
 from backend.plugin.tools import build_final_router
@@ -53,6 +55,9 @@ def register_middleware(app: FastAPI) -> None:
     :param app: FastAPI 应用实例
     :return:
     """
+
+    # Opera log
+    # app.add_middleware(OperaLogMiddleware)
 
     # Trace ID
     app.add_middleware(CorrelationIdMiddleware, validator=False)

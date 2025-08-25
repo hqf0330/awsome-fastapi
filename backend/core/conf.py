@@ -44,6 +44,22 @@ class Settings(BaseSettings):
         ('GET', f'{FASTAPI_API_V1_PATH}/auth/captcha'),
     }
 
+    # Trace ID
+    TRACE_ID_REQUEST_HEADER_KEY: str = 'X-Request-ID'
+    TRACE_ID_LOG_LENGTH: int = 32  # UUID 长度，必须小于等于 32
+    TRACE_ID_LOG_DEFAULT_VALUE: str = '-'
+
+    # 操作日志
+    OPERA_LOG_PATH_EXCLUDE: list[str] = [
+        '/favicon.ico',
+        '/docs',
+        '/redoc',
+        '/openapi',
+        f'{FASTAPI_API_V1_PATH}/auth/login/swagger',
+        f'{FASTAPI_API_V1_PATH}/oauth2/github/callback',
+        f'{FASTAPI_API_V1_PATH}/oauth2/linux-do/callback',
+    ]
+
 
 @lru_cache
 def get_settings() -> Settings:

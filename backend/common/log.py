@@ -23,3 +23,6 @@ class InterceptHandler(logging.Handler):
             depth += 1
 
         logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+
+# 创建 logger 实例
+log = logger
